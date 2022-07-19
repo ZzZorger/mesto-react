@@ -31,7 +31,9 @@ export default function Main() {
 }
 
 function handleEditAvatarClick() {
-
+  // const avatar = document.querySelector('.profile__image');
+  // avatar.addEventListener('click', )
+  // const avatarPopup = document.quertSelector('.')
 }
 
 function handleEditProfileClick() {
