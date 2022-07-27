@@ -1,16 +1,16 @@
-export default function Main() {
+export default function Main(props) {
   return (
     <main className="content">
       <section className="profile">
-        <div className="profile__avatar">
+        <div className="profile__avatar" onClick={props.onEditAvatar}>
           <img className="profile__image" alt="изображение профиля"/>
         </div>
         <div className="profile__info">
           <h1 className="profile__name">Жак-Ив Кусто</h1>
-          <button className="profile__edit-button" type="button" aria-label="редактирование профиля"></button>
+          <button className="profile__edit-button" type="button" aria-label="редактирование профиля" onClick={props.onEditProfile}></button>
           <p className="profile__job">Исследователь океана</p>
         </div>
-        <button className="profile__add-button" type="button" aria-label="добавление фотокарточки"></button>
+        <button className="profile__add-button" type="button" aria-label="добавление фотокарточки" onClick={props.onAddPlace}></button>
       </section>
 
       <section className="elements">
@@ -30,16 +30,3 @@ export default function Main() {
   )
 }
 
-function handleEditAvatarClick() {
-  // const avatar = document.querySelector('.profile__image');
-  // avatar.addEventListener('click', )
-  // const avatarPopup = document.quertSelector('.')
-}
-
-function handleEditProfileClick() {
-
-}
-
-function handleAddPlaceClick() {
-
-}

@@ -2,88 +2,76 @@ import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
+import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js';
+
+
 
 function App() {
+  function handleEditAvatarClick() {
+    isEditAvatarPopupOpenSetter(true)
+  }
+  function handleEditProfileClick() {
+    isEditProfilePopupOpenSetter(true);
+  }
+  function handleAddPlaceClick() {
+    isAddPlacePopupOpenSetter(true)
+  }
+  function closeAllPopups() {
+
+  }
+  // const [isPopupOpen, popupOpenSetter] = React.useState(false);
+  const [isEditProfilePopupOpen, isEditProfilePopupOpenSetter] = React.useState(false)
+  const [isAddPlacePopupOpen, isAddPlacePopupOpenSetter] = React.useState(false)
+  const [isEditAvatarPopupOpen, isEditAvatarPopupOpenSetter] = React.useState(false)
+  
   return (
-<body className="body">
-  <div className="page">
-    <Header/>
-    <Main/>
-    <Footer/>
-  </div>
-  <div className="popup popup-profile">
-    <div className="popup__content">
-      <button className="close-button" type="button" aria-label="закрыть окно"></button>
-      <h2 className="popup__title">Редактировать профиль</h2>
-      <form className="popup__form" name="popup_data" novalidate>
+    <div className="body">
+      <div className="page">
+        <Header />
+        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
+        <Footer />
+      </div>
+      <PopupWithForm name="profile" title="Редактировать профиль" submit="Сохранить" isOpen={isEditProfilePopupOpen}>
         <fieldset className="popup__fieldset">
           <div className="popup__input-field">
             <input id="profile-name" className="popup__input popup__input_type_name" type="text" name="name"
-              autocomplete="off" placeholder="Имя" minlength="2" maxlength="40" required/>
+              placeholder="Имя" required />
             <span className="popup__error profile-name-error" name="Error"></span>
           </div>
           <div className="popup__input-field">
             <input id="profile-about" className="popup__input popup__input_type_place" type="text" name="about"
-              autocomplete="off" placeholder="Профессиональная деятельность" minlength="2" maxlength="200" required/>
+              placeholder="Профессиональная деятельность" required />
             <span className="popup__error profile-about-error" name="Error"></span>
           </div>
         </fieldset>
-        <button className="popup__save-button" type="submit">Сохранить</button>
-      </form>
-    </div>
-  </div>
-  <div className="popup popup-card">
-    <div className="popup__content">
-      <button className="close-button" type="button" aria-label="закрыть окно"></button>
-      <h2 className="popup__title">Новое место</h2>
-      <form className="popup__form" name="popup_data" novalidate>
+      </PopupWithForm>
+      <PopupWithForm name="card" title="Новое место" submit="Создать" isOpen={isAddPlacePopupOpen}>
         <fieldset className="popup__fieldset">
           <div className="popup__input-field">
-            <input id="card-name" className="popup__input popup__input_type_name" type="text" name="name" autocomplete="off"
-              placeholder="Название" minlength="2" maxlength="30" required/>
+            <input id="card-name" className="popup__input popup__input_type_name" type="text" name="name"
+              placeholder="Название" required />
             <span className="popup__error card-name-error" name="Error"></span>
           </div>
           <div className="popup__input-field">
-            <input id="card-url" className="popup__input popup__input_type_place" type="url" name="url" autocomplete="off"
-              placeholder="Ссылка на картинку" required/>
+            <input id="card-url" className="popup__input popup__input_type_place" type="url" name="url"
+              placeholder="Ссылка на картинку" required />
             <span className="popup__error card-url-error" name="Error"></span>
           </div>
         </fieldset>
-        <button className="popup__save-button" type="submit">Создать</button>
-      </form>
-    </div>
-  </div>
-  <div className="popup popup-confirm">
-    <div className="popup__content">
-      <button className="close-button" type="button" aria-label="закрыть окно"></button>
-      <h2 className="popup__title">Вы уверены, что хотите удалить карточку?</h2>
-      <button className="popup__save-button" type="button">Да</button>
-    </div>
-  </div>
-  <div className="popup popup-avatar">
-    <div className="popup__content">
-      <button className="close-button" type="button" aria-label="закрыть окно"></button>
-      <h2 className="popup__title">Обновить аватар</h2>
-      <form className="popup__form" name="popup_data" novalidate>
+      </PopupWithForm>
+      <PopupWithForm name="confirm" title="Вы уверены, что хотите удалить карточку?" submit="Да"></PopupWithForm>
+      <PopupWithForm name="avatar" title="Обновить аватар" submit="Сохранить" isOpen={isEditAvatarPopupOpen}>
         <fieldset className="popup__fieldset">
           <div className="popup__input-field">
-            <input id="avatar-url" className="popup__input popup__input_type_place" type="url" name="url" autocomplete="off"
-              placeholder="Ссылка на аватар" required/>
+            <input id="avatar-url" className="popup__input popup__input_type_place" type="url" name="url"
+              placeholder="Ссылка на аватар" required />
             <span className="popup__error avatar-url-error" name="Error"></span>
           </div>
         </fieldset>
-        <button className="popup__save-button" type="submit">Сохранить</button>
-      </form>
+      </PopupWithForm>
+      <ImagePopup />
     </div>
-  </div>
-  <div className="popup img-popup">
-    <div className="img-popup__content">
-      <button className="close-button" type="button" aria-label="закрыть окно"></button>
-      <img className="img-popup__img" src="<%=require('./images/close_icon.svg')%>" alt="Alternative Text"/>
-      <h2 className="img-popup__title"></h2>
-    </div>
-  </div>
-</body>
   );
 }
 
