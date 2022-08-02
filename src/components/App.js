@@ -8,22 +8,25 @@ import ImagePopup from './ImagePopup.js';
 
 
 function App() {
+  //Обработчики открытия и закрытия попапов
   function handleEditAvatarClick() {
-    isEditAvatarPopupOpenSetter(true)
+    isEditAvatarPopupOpenSetter(true);
   }
   function handleEditProfileClick() {
     isEditProfilePopupOpenSetter(true);
   }
   function handleAddPlaceClick() {
-    isAddPlacePopupOpenSetter(true)
+    isAddPlacePopupOpenSetter(true);
   }
   function closeAllPopups() {
-
+    isEditProfilePopupOpenSetter(false);
+    isAddPlacePopupOpenSetter(false);
+    isEditAvatarPopupOpenSetter(false);
   }
-  // const [isPopupOpen, popupOpenSetter] = React.useState(false);
-  const [isEditProfilePopupOpen, isEditProfilePopupOpenSetter] = React.useState(false)
-  const [isAddPlacePopupOpen, isAddPlacePopupOpenSetter] = React.useState(false)
-  const [isEditAvatarPopupOpen, isEditAvatarPopupOpenSetter] = React.useState(false)
+  const [isEditProfilePopupOpen, isEditProfilePopupOpenSetter] = React.useState(false);
+  const [isAddPlacePopupOpen, isAddPlacePopupOpenSetter] = React.useState(false);
+  const [isEditAvatarPopupOpen, isEditAvatarPopupOpenSetter] = React.useState(false);
+
   
   return (
     <div className="body">
@@ -32,7 +35,7 @@ function App() {
         <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
         <Footer />
       </div>
-      <PopupWithForm name="profile" title="Редактировать профиль" submit="Сохранить" isOpen={isEditProfilePopupOpen}>
+      <PopupWithForm name="profile" title="Редактировать профиль" submit="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <fieldset className="popup__fieldset">
           <div className="popup__input-field">
             <input id="profile-name" className="popup__input popup__input_type_name" type="text" name="name"
@@ -46,7 +49,7 @@ function App() {
           </div>
         </fieldset>
       </PopupWithForm>
-      <PopupWithForm name="card" title="Новое место" submit="Создать" isOpen={isAddPlacePopupOpen}>
+      <PopupWithForm name="card" title="Новое место" submit="Создать" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
         <fieldset className="popup__fieldset">
           <div className="popup__input-field">
             <input id="card-name" className="popup__input popup__input_type_name" type="text" name="name"
@@ -61,7 +64,7 @@ function App() {
         </fieldset>
       </PopupWithForm>
       <PopupWithForm name="confirm" title="Вы уверены, что хотите удалить карточку?" submit="Да"></PopupWithForm>
-      <PopupWithForm name="avatar" title="Обновить аватар" submit="Сохранить" isOpen={isEditAvatarPopupOpen}>
+      <PopupWithForm name="avatar" title="Обновить аватар" submit="Сохранить" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
         <fieldset className="popup__fieldset">
           <div className="popup__input-field">
             <input id="avatar-url" className="popup__input popup__input_type_place" type="url" name="url"
