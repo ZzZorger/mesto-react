@@ -11,8 +11,22 @@ export default function Main(props) {
   api.getCardsData()
     .then(res => {
       // setCards(res)
+      // console.log(res[0].name)
+      // console.log(res.likes)
+      setCards(res)
     })
-  const [cards, setCards] = React.useState([])
+    const [cards, setCards] = React.useState([
+      // console.log(cards.likes.length)
+            // <article className="card">
+            //   <img className="card__img" src={cards.link}/>
+            //   <h2 className="card__name">{cards.name}</h2>
+            //   <div className="card__like">
+            //     <button className="card__like-button" type="button" aria-label="поставить лайк"></button>
+            //     <p className="card__like-number"></p>
+            //   </div>
+            //   <button className="card__delete-button" type="button" aria-label="удалить карточку"></button>
+            // </article>
+    ])
   const [userAvatar, setUserAvatar] = React.useState('')
   const [userName, setUserName] = React.useState('')
   const [userDescription, setUserDescription] = React.useState('')
@@ -30,7 +44,6 @@ export default function Main(props) {
         </div>
         <button className="profile__add-button" type="button" aria-label="добавление фотокарточки" onClick={props.onAddPlace}></button>
       </section>
-
       <section className="elements">
         <template id="card-template">
           <article className="card">
