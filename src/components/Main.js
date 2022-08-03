@@ -8,10 +8,15 @@ export default function Main(props) {
       setUserName(res.name);
       setUserDescription(res.about);
     })
-
+  api.getCardsData()
+    .then(res => {
+      // setCards(res)
+    })
+  const [cards, setCards] = React.useState([])
   const [userAvatar, setUserAvatar] = React.useState('')
   const [userName, setUserName] = React.useState('')
   const [userDescription, setUserDescription] = React.useState('')
+  // console.log(cards)
   return (
     <main className="content">
       <section className="profile">
