@@ -22,17 +22,21 @@ function App() {
     isEditProfilePopupOpenSetter(false);
     isAddPlacePopupOpenSetter(false);
     isEditAvatarPopupOpenSetter(false);
+    setSelectedCard(null);
+  }
+  function handleCardClick(card) {
+    setSelectedCard(card)
   }
   const [isEditProfilePopupOpen, isEditProfilePopupOpenSetter] = React.useState(false);
   const [isAddPlacePopupOpen, isAddPlacePopupOpenSetter] = React.useState(false);
   const [isEditAvatarPopupOpen, isEditAvatarPopupOpenSetter] = React.useState(false);
-
+  const [selectedCard, setSelectedCard] = React.useState(null);
   
   return (
     <div className="body">
       <div className="page">
         <Header />
-        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
+        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
         <Footer />
       </div>
       <PopupWithForm name="profile" title="Редактировать профиль" submit="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
@@ -73,7 +77,7 @@ function App() {
           </div>
         </fieldset>
       </PopupWithForm>
-      <ImagePopup />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </div>
   );
 }
