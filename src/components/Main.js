@@ -10,9 +10,15 @@ export default function Main(props) {
         setUserName(res.name);
         setUserDescription(res.about);
       })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`)
+      })
     api.getCardsData()
       .then(res => {
         setCards(res)
+      })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`)
       })
   }, []);
   const [cards, setCards] = React.useState([]);
@@ -38,17 +44,6 @@ export default function Main(props) {
             <Card card={item} onCardClick={props.onCardClick}/>
           )
         })}
-        <template id="card-template">
-          <article className="card">
-            <img className="card__img" />
-            <h2 className="card__name"></h2>
-            <div className="card__like">
-              <button className="card__like-button" type="button" aria-label="поставить лайк"></button>
-              <p className="card__like-number">0</p>
-            </div>
-            <button className="card__delete-button" type="button" aria-label="удалить карточку"></button>
-          </article>
-        </template>
       </section>
     </main>
   )

@@ -8,6 +8,10 @@ import ImagePopup from './ImagePopup.js';
 
 
 function App() {
+  const [isEditProfilePopupOpen, isEditProfilePopupOpenSetter] = React.useState(false);
+  const [isAddPlacePopupOpen, isAddPlacePopupOpenSetter] = React.useState(false);
+  const [isEditAvatarPopupOpen, isEditAvatarPopupOpenSetter] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
   //Обработчики открытия и закрытия попапов
   function handleEditAvatarClick() {
     isEditAvatarPopupOpenSetter(true);
@@ -27,10 +31,6 @@ function App() {
   function handleCardClick(card) {
     setSelectedCard(card)
   }
-  const [isEditProfilePopupOpen, isEditProfilePopupOpenSetter] = React.useState(false);
-  const [isAddPlacePopupOpen, isAddPlacePopupOpenSetter] = React.useState(false);
-  const [isEditAvatarPopupOpen, isEditAvatarPopupOpenSetter] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(null);
   
   return (
     <div className="body">
@@ -39,7 +39,7 @@ function App() {
         <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
         <Footer />
       </div>
-      <PopupWithForm name="profile" title="Редактировать профиль" submit="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <fieldset className="popup__fieldset">
           <div className="popup__input-field">
             <input id="profile-name" className="popup__input popup__input_type_name" type="text" name="name"
@@ -68,7 +68,7 @@ function App() {
         </fieldset>
       </PopupWithForm>
       <PopupWithForm name="confirm" title="Вы уверены, что хотите удалить карточку?" submit="Да"></PopupWithForm>
-      <PopupWithForm name="avatar" title="Обновить аватар" submit="Сохранить" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
         <fieldset className="popup__fieldset">
           <div className="popup__input-field">
             <input id="avatar-url" className="popup__input popup__input_type_place" type="url" name="url"

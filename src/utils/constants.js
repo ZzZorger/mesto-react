@@ -1,4 +1,3 @@
-export const classNameElements = '.elements';
 export const templateId = '#card-template';
 export const profilePopup = document.querySelector('.popup-profile');
 export const cardPopup = document.querySelector('.popup-card');
@@ -11,21 +10,15 @@ export const popupProfileName = profilePopup.querySelector('.popup__input_type_n
 export const popupProfilePlace = profilePopup.querySelector('.popup__input_type_place');
 export const popupCardName = cardPopup.querySelector('.popup__input_type_name');
 export const popupCardPlace = cardPopup.querySelector('.popup__input_type_place');
-export const profilePopupClass = '.popup-profile';
-export const cardPopupClass = '.popup-card';
-export const cardImgPopupClass = '.card__img';
 export const imgPopup = document.querySelector('.img-popup');
 export const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
 export const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
 export const profileName = document.querySelector('.profile__name');
 export const profileAbout = document.querySelector('.profile__job');
-export const confirmPopupClass = '.popup-confirm';
 export const confirmPopup = document.querySelector(confirmPopupClass);
 export const confirmPopupButton = confirmPopup.querySelector('.popup__save-button');
 export const confirmButton = document.querySelector('.popup__confirm');
-export const avatarEditionClass = '.profile__avatar';
 export const avatarEditionButton = document.querySelector(avatarEditionClass);
-export const avatarPopupClass = '.popup-avatar';
 const avatarPopup = document.querySelector(avatarPopupClass);
 export const avatarPopupForm = avatarPopup.querySelector('.popup__form');
 
