@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import {userData} from '../contexts/CurrentUserContext.js'
 import { api } from '../utils/Api.js';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
-import {userData} from '../contexts/CurrentUserContext.js'
 
 function App() {
   const [currentUser, setUserData] = useState([]);
