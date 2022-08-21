@@ -1,20 +1,12 @@
 import { useEffect, useState, useContext } from 'react';
+import { cardsArray } from '../contexts/CardsContext.js';
 import { userData } from '../contexts/CurrentUserContext.js';
-import { api } from '../utils/Api.js';
+// import { api } from '../utils/Api.js';
 import Card from './Card.js'
 
 export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const currentUser = useContext(userData)
-  const [cards, setCards] = useState([]);
-  useEffect(() => {
-    api.getCardsData()
-      .then(res => {
-        setCards(res)
-      })
-      .catch(err => {
-        console.log(`Ошибка: ${err}`)
-      })
-  }, []);
+  const currentUser = useContext(userData);
+  const cards = useContext(cardsArray);
   return (
     <main className="content">
       <section className="profile">
