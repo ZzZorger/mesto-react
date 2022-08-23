@@ -1,4 +1,10 @@
-export default function Card({ card, onCardClick }) {
+export default function Card({ card, onCardClick, ownerId, onCardLike }) {
+  onCardLike(card);
+  const isOwn = card.owner._id === ownerId;
+  const cardDeleteButtonClassName = (
+    `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
+  );
+  
   function handleClick() {
     onCardClick(card);
   } 
@@ -10,7 +16,7 @@ export default function Card({ card, onCardClick }) {
         <button className="card__like-button" type="button" aria-label="поставить лайк"></button>
         <p className="card__like-number">{card.likes.length}</p>
       </div>
-      <button className="card__delete-button" type="button" aria-label="удалить карточку"></button>
+      <button className={cardDeleteButtonClassName} type="button" aria-label="удалить карточку"></button>
     </article>
   )
 }

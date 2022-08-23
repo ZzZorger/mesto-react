@@ -1,12 +1,30 @@
 import { useEffect, useState, useContext } from 'react';
 import { cardsArray } from '../contexts/CardsContext.js';
 import { userData } from '../contexts/CurrentUserContext.js';
-// import { api } from '../utils/Api.js';
-import Card from './Card.js'
+import { api } from '../utils/Api.js';
+import Card from './Card.js';
+
+
+
 
 export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const currentUser = useContext(userData);
   const cards = useContext(cardsArray);
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    {!isLiked ? (
+      api.putLike(card._id)
+      .then((newCard) => {
+        console.log(newCard)
+      })
+    )  : (
+      api.putDislike(card._id)
+      .then((newCard) => {
+      console.log(newCard)
+    })
+    )}
+    
+  }
   return (
     <main className="content">
       <section className="profile">
@@ -23,7 +41,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
       <section className="elements">
         {cards.map(item => {
           return (
-            <Card card={item} onCardClick={onCardClick}/>
+            <Card card={item} onCardClick={onCardClick} ownerId={currentUser._id} onCardLike={handleCardLike}/>
           )
         })}
       </section>
