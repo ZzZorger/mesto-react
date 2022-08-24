@@ -30,7 +30,7 @@ function App() {
       })
       .catch(err => {
         console.log(`Ошибка: ${err}`)
-      })  
+      })
   }, []);
   //Обработчики открытия и закрытия попапов
   function handleEditAvatarClick() {
@@ -51,14 +51,14 @@ function App() {
   function handleCardClick(card) {
     setSelectedCard(card)
   }
-  
+
   return (
     <userData.Provider value={currentUser}>
       <cardsArray.Provider value={cards}>
         <div className="body">
           <div className="page">
             <Header />
-            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} setCards={setCards}/>
+            <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} setCards={setCards} />
             <Footer />
           </div>
           <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
@@ -99,7 +99,7 @@ function App() {
               </div>
             </fieldset>
           </PopupWithForm>
-          <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         </div>
       </cardsArray.Provider>
     </userData.Provider>

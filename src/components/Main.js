@@ -13,9 +13,21 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, isLiked)
-    .then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+      .then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`)
+      });
+  }
+  function handleDeleteCard(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards(cards.filter(c => c !== card))
+      })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`)
+      });
   }
   return (
     <main className="content">
@@ -33,7 +45,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
       <section className="elements">
         {cards.map(item => {
           return (
-            <Card card={item} onCardClick={onCardClick} userId={currentUser._id} onCardLike={handleCardLike}/>
+            <Card card={item} onCardClick={onCardClick} userId={currentUser._id} onCardLike={handleCardLike} onCardDelete={handleDeleteCard} />
           )
         })}
       </section>
