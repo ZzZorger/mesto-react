@@ -7,23 +7,15 @@ import Card from './Card.js';
 
 
 
-export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
+export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, setCards }) {
   const currentUser = useContext(userData);
   const cards = useContext(cardsArray);
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    {!isLiked ? (
-      api.putLike(card._id)
-      .then((newCard) => {
-        console.log(newCard)
-      })
-    )  : (
-      api.putDislike(card._id)
-      .then((newCard) => {
-      console.log(newCard)
-    })
-    )}
-    
+    api.changeLikeCardStatus(card._id, isLiked)
+    .then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    });
   }
   return (
     <main className="content">
@@ -41,7 +33,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
       <section className="elements">
         {cards.map(item => {
           return (
-            <Card card={item} onCardClick={onCardClick} ownerId={currentUser._id} onCardLike={handleCardLike}/>
+            <Card card={item} onCardClick={onCardClick} userId={currentUser._id} onCardLike={handleCardLike}/>
           )
         })}
       </section>

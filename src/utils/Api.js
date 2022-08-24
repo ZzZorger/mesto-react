@@ -77,6 +77,14 @@ class Api {
     })
       .then((res) => this._getResponseData(res))
   }
+  changeLikeCardStatus(id, like) {
+    if (!like) {
+      return this.putLike(id);
+    }
+    else {
+      return this.putDislike(id);
+    }
+  }
 }
 
 const api = new Api({
