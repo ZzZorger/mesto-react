@@ -6,21 +6,20 @@ export default function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   function handleNameChange(e) {
-    setName(e.target.name);
-    console.log({name})
+    setName(e.target.value);
   }
   function handleDescriptionChange(e) {
-    setDescription(e.target.description);
-    console.log(description)
+    setDescription(e.target.value);
   }
   function handleSubmit(e) {
     e.preventDefault();
     // console.log({name, description})
-    // onUpdateUser({
-    //   name,
-    //   about: description,
-    // });
+    onUpdateUser({
+      name,
+      about: description,
+    });
   }
+  // console.log(currentUser)
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
@@ -29,13 +28,13 @@ export default function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
       <fieldset className="popup__fieldset">
         <div className="popup__input-field">
-          <input id="profile-name" className="popup__input popup__input_type_name" type="text" name="name"
-            placeholder={name} required onChange={handleNameChange}/>
+          <input id="profile-name" className="popup__input popup__input_type_name" type="text" name={name}
+            placeholder="Имя" required onChange={handleNameChange}/>
           <span className="popup__error profile-name-error" name="Error"></span>
         </div>
         <div className="popup__input-field">
-          <input id="profile-about" className="popup__input popup__input_type_place" type="text" name="about"
-            placeholder={description} required onChange={handleDescriptionChange}/>
+          <input id="profile-about" className="popup__input popup__input_type_place" type="text" name={description}
+            placeholder="Деятельность" required onChange={handleDescriptionChange}/>
           <span className="popup__error profile-about-error" name="Error"></span>
         </div>
       </fieldset>
