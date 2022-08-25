@@ -7,6 +7,7 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
+import EditProfilePopup from './EditProfilePopup.js';
 
 function App() {
   const [currentUser, setUserData] = useState([]);
@@ -51,7 +52,13 @@ function App() {
   function handleCardClick(card) {
     setSelectedCard(card)
   }
-
+  function handleUpdateUser(data) {
+    api.patchProfileData(data)
+    .then((newData) => {
+      // setUserData(newData);
+      console.log(newData)
+    })
+  }
   return (
     <userData.Provider value={currentUser}>
       <cardsArray.Provider value={cards}>
@@ -61,20 +68,7 @@ function App() {
             <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} setCards={setCards} />
             <Footer />
           </div>
-          <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-            <fieldset className="popup__fieldset">
-              <div className="popup__input-field">
-                <input id="profile-name" className="popup__input popup__input_type_name" type="text" name="name"
-                  placeholder="Имя" required />
-                <span className="popup__error profile-name-error" name="Error"></span>
-              </div>
-              <div className="popup__input-field">
-                <input id="profile-about" className="popup__input popup__input_type_place" type="text" name="about"
-                  placeholder="Профессиональная деятельность" required />
-                <span className="popup__error profile-about-error" name="Error"></span>
-              </div>
-            </fieldset>
-          </PopupWithForm>
+          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <PopupWithForm name="card" title="Новое место" submit="Создать" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
             <fieldset className="popup__fieldset">
               <div className="popup__input-field">
