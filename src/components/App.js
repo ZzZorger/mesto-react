@@ -24,14 +24,14 @@ function App() {
       })
       .catch(err => {
         console.log(`Ошибка: ${err}`)
-      })
+      });
     api.getCardsData()
       .then(res => {
         setCards(res)
       })
       .catch(err => {
         console.log(`Ошибка: ${err}`)
-      })
+      });
   }, []);
   //Обработчики открытия и закрытия попапов
   function handleEditAvatarClick() {
@@ -55,9 +55,11 @@ function App() {
   function handleUpdateUser(data) {
     api.patchProfileData(data)
     .then((newData) => {
-      // setUserData(newData);
-      console.log(newData)
+      setUserData(newData);
     })
+    .catch(err => {
+      console.log(`Ошибка: ${err}`)
+    });
   }
   return (
     <userData.Provider value={currentUser}>
