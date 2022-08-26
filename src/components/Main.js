@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { cardsArray } from '../contexts/CardsContext.js';
 import { userData } from '../contexts/CurrentUserContext.js';
-import { api } from '../utils/Api.js';
 import Card from './Card.js';
 
 export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete }) {

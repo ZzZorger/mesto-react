@@ -56,12 +56,12 @@ function App() {
   }
   function handleAddPlaceSubmit(newCard) {
     api.postCard(newCard)
-    .then((newCard) => {
-      setCards([newCard, ...cards]);
-    })
-    .catch(err => {
-      console.log(`Ошибка: ${err}`)
-    });
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+      })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`)
+      });
   }
   //Open and Close handlers
   function handleEditAvatarClick() {
