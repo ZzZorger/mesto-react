@@ -4,28 +4,9 @@ import { userData } from '../contexts/CurrentUserContext.js';
 import { api } from '../utils/Api.js';
 import Card from './Card.js';
 
-export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, setCards }) {
+export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(userData);
   const cards = useContext(cardsArray);
-  function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, isLiked)
-      .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-      })
-      .catch(err => {
-        console.log(`Ошибка: ${err}`)
-      });
-  }
-  function handleDeleteCard(card) {
-    api.deleteCard(card._id)
-      .then(() => {
-        setCards(cards.filter(c => c !== card))
-      })
-      .catch(err => {
-        console.log(`Ошибка: ${err}`)
-      });
-  }
   return (
     <main className="content">
       <section className="profile">
@@ -42,7 +23,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
       <section className="elements">
         {cards.map(item => {
           return (
-            <Card card={item} onCardClick={onCardClick} userId={currentUser._id} onCardLike={handleCardLike} onCardDelete={handleDeleteCard} />
+            <Card card={item} onCardClick={onCardClick} userId={currentUser._id} onCardLike={onCardLike} onCardDelete={onCardDelete} />
           )
         })}
       </section>

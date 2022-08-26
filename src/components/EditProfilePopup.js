@@ -27,13 +27,13 @@ export default function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
       <fieldset className="popup__fieldset">
         <div className="popup__input-field">
-          <input id="profile-name" className="popup__input popup__input_type_name" type="text" name={name}
-            placeholder="Имя" required onChange={handleNameChange}/>
+          <input id="profile-name" className="popup__input popup__input_type_name" type="text" name="name"
+            placeholder="Имя" required onChange={handleNameChange} value={name}/>
           <span className="popup__error profile-name-error" name="Error"></span>
         </div>
         <div className="popup__input-field">
-          <input id="profile-about" className="popup__input popup__input_type_place" type="text" name={description}
-            placeholder="Деятельность" required onChange={handleDescriptionChange}/>
+          <input id="profile-about" className="popup__input popup__input_type_place" type="text" name="about"
+            placeholder="Деятельность" required onChange={handleDescriptionChange} value={description}/>
           <span className="popup__error profile-about-error" name="Error"></span>
         </div>
       </fieldset>
