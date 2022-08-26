@@ -1,6 +1,5 @@
 export default function Card({ card, onCardClick, userId, onCardLike, onCardDelete }) {
   const isOwn = card.owner._id === userId;
-  // console.log(isOwn)
   const cardDeleteButtonClassName = (
     `card__delete-button ${isOwn ? 'card__delete-button-visible' : 'card__delete-button-hidden'}`
   );

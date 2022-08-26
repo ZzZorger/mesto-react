@@ -8,8 +8,10 @@ import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
 
 function App() {
+  //Hooks
   const [currentUser, setUserData] = useState([]);
   const [cards, setCards] = useState([]);
   const [isEditProfilePopupOpen, isEditProfilePopupOpenSetter] = useState(false);
@@ -33,7 +35,25 @@ function App() {
         console.log(`Ошибка: ${err}`)
       });
   }, []);
-  //Обработчики открытия и закрытия попапов
+  function handleUpdateUser(data) {
+    api.patchProfileData(data)
+    .then((newData) => {
+      setUserData(newData);
+    })
+    .catch(err => {
+      console.log(`Ошибка: ${err}`)
+    });
+  }
+  function handleUpdateAvatar(img) {
+    api.patchProfileAvatar(img)
+    .then((newImg) => {
+      setUserData(newImg)
+    })
+    .catch(err => {
+      console.log(`Ошибка: ${err}`)
+    });
+  }
+  //Open and Close handlers
   function handleEditAvatarClick() {
     isEditAvatarPopupOpenSetter(true);
   }
@@ -52,15 +72,7 @@ function App() {
   function handleCardClick(card) {
     setSelectedCard(card)
   }
-  function handleUpdateUser(data) {
-    api.patchProfileData(data)
-    .then((newData) => {
-      setUserData(newData);
-    })
-    .catch(err => {
-      console.log(`Ошибка: ${err}`)
-    });
-  }
+
   return (
     <userData.Provider value={currentUser}>
       <cardsArray.Provider value={cards}>
@@ -86,15 +98,7 @@ function App() {
             </fieldset>
           </PopupWithForm>
           <PopupWithForm name="confirm" title="Вы уверены, что хотите удалить карточку?" submit="Да"></PopupWithForm>
-          <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-            <fieldset className="popup__fieldset">
-              <div className="popup__input-field">
-                <input id="avatar-url" className="popup__input popup__input_type_place" type="url" name="url"
-                  placeholder="Ссылка на аватар" required />
-                <span className="popup__error avatar-url-error" name="Error"></span>
-              </div>
-            </fieldset>
-          </PopupWithForm>
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         </div>
       </cardsArray.Provider>
