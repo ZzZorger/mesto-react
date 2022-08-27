@@ -20,7 +20,13 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
       <section className="elements">
         {cards.map(item => {
           return (
-            <Card key={item._id} card={item} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} />
+            <Card
+              key={item._id}
+              card={item}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />
           )
         })}
       </section>
