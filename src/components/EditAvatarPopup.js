@@ -7,7 +7,6 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     onUpdateAvatar({
       url: avatar,
     });
-    onClose();
   }
   function handleAvatarChange(e) {
     setAvatar(e.target.value);

@@ -13,7 +13,7 @@ import AddPlacePopup from './AddPlacePopup.js';
 
 function App() {
   //Hooks
-  const [currentUser, setUserData] = useState([]);
+  const [currentUser, setUserData] = useState({});
   const [cards, setCards] = useState([]);
   const [isEditProfilePopupOpen, isEditProfilePopupOpenSetter] = useState(false);
   const [isAddPlacePopupOpen, isAddPlacePopupOpenSetter] = useState(false);
@@ -41,6 +41,9 @@ function App() {
       .then((newData) => {
         setUserData(newData);
       })
+      .then(() => {
+        closeAllPopups();
+      })
       .catch(err => {
         console.log(`Ошибка: ${err}`)
       });
@@ -50,6 +53,9 @@ function App() {
       .then((newImg) => {
         setUserData(newImg)
       })
+      .then(() => {
+        closeAllPopups();
+      })
       .catch(err => {
         console.log(`Ошибка: ${err}`)
       });
@@ -58,6 +64,9 @@ function App() {
     api.postCard(newCard)
       .then((newCard) => {
         setCards([newCard, ...cards]);
+      })
+      .then(() => {
+        closeAllPopups();
       })
       .catch(err => {
         console.log(`Ошибка: ${err}`)

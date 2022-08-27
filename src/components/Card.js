@@ -1,9 +1,13 @@
-export default function Card({ card, onCardClick, userId, onCardLike, onCardDelete }) {
-  const isOwn = card.owner._id === userId;
+import { useContext } from 'react';
+import { userData } from "../contexts/CurrentUserContext";
+
+export default function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+  const currentUser = useContext(userData);
+  const isOwn = card.owner._id === currentUser._id;
   const cardDeleteButtonClassName = (
     `card__delete-button ${isOwn ? 'card__delete-button-visible' : 'card__delete-button-hidden'}`
   );
-  const isLiked = card.likes.some(i => i._id === userId);
+  const isLiked = card.likes.some(i => i._id === currentUser._id);
   const cardLikeButtonClassName = (
     `card__like-button ${isLiked ? 'card__like-button_active' : ''}`
   );

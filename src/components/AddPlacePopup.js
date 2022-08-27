@@ -9,7 +9,6 @@ export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       name,
       url
     });
-    onClose();
   }
   function handleNameChange(e) {
     setName(e.target.value);
