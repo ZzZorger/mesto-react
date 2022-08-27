@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { userData } from '../contexts/CurrentUserContext.js'
-import { cardsArray } from '../contexts/CardsContext.js'
 import { api } from '../utils/Api.js';
 import Header from './Header.js';
 import Main from './Main.js';
@@ -114,7 +113,6 @@ function App() {
   }
   return (
     <userData.Provider value={currentUser}>
-      <cardsArray.Provider value={cards}>
         <div className="body">
           <div className="page">
             <Header />
@@ -125,6 +123,7 @@ function App() {
               onCardClick={handleCardClick}
               onCardLike={handleCardLike}
               onCardDelete={handleDeleteCard}
+              cards={cards}
             />
             <Footer />
           </div>
@@ -153,7 +152,6 @@ function App() {
             onClose={closeAllPopups}
           />
         </div>
-      </cardsArray.Provider>
     </userData.Provider>
   );
 }

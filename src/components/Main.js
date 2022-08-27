@@ -1,11 +1,9 @@
 import { useContext } from 'react';
-import { cardsArray } from '../contexts/CardsContext.js';
 import { userData } from '../contexts/CurrentUserContext.js';
 import Card from './Card.js';
 
-export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete }) {
+export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete, cards }) {
   const currentUser = useContext(userData);
-  const cards = useContext(cardsArray);
   return (
     <main className="content">
       <section className="profile">
